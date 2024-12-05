@@ -8,7 +8,7 @@
 	const navItems = [
 		{ label: "EVENTOS", icon: Calendar, href: "#" },
 		{ label: "PERFIL", icon: Settings, href: "#", active: true },
-		{ label: "AJUSTES", icon: Settings, href: "#" },
+		{ label: "AJUSTES", icon: Settings, href: "/settings" },
 		{ label: "FACTURACIÓN", icon: CreditCard, href: "#" },
 	];
 
