@@ -1,63 +1,51 @@
 <script lang="ts">
     import EventCard from "./EventCard.svelte";
-	const categories = [
-		{ id: 1, name: "TODO", active: true },
-		{ id: 2, name: "SOCIAL", active: false },
-		{ id: 3, name: "EDUCATIVO", active: false },
-		{ id: 4, name: "DEPORTIVO", active: false },
-		{ id: 5, name: "CULTURAL", active: false },
-		{ id: 6, name: "MÁS", active: false },
-	];
-    const events = [
-	{
-		id: 1,
-		image: "https://picsum.photos/400/300?random=1",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-	{
-		id: 2,
-		image: "https://picsum.photos/400/300?random=2",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-	{
-		id: 3,
-		image: "https://picsum.photos/400/300?random=3",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-	{
-		id: 4,
-		image: "https://picsum.photos/400/300?random=4",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-	{
-		id: 5,
-		image: "https://picsum.photos/400/300?random=5",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-	{
-		id: 6,
-		image: "https://picsum.photos/400/300?random=6",
-		title: "The Job Hunting Accelerator Bootcamp - Land Your Dream Job",
-		location: "Innokind Co-working Center",
-		price: 65,
-		status: "Pending",
-	},
-    ];
+	import { onMount } from "svelte";
+	import service from '../lib/service';
+
+	let categories: any[] = [];
+	let events: any[] = [];
+
+	onMount(async()=>{
+		await listCategories();
+		await listEvents();
+	});
+
+	const listCategories = async() => {
+		try {
+			let response = await service.category.list();
+			let list = response.data.list
+			list.forEach((el: { name: any; active: boolean; }) => {
+				el.active=false;
+				el.name = el.name.toUpperCase();
+			});
+			let obj={id:10, name:'TODOS', active:true, description:null}
+			list.unshift(obj);
+			categories = list;
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	
+	const listEvents = async() =>{
+		try {
+			let respponse = await service.events.list({})
+			let list = respponse.data.list;
+			list.forEach((e: { image: string; eventId: any; location: any; })=>{
+				e.image=`https://picsum.photos/400/300?random=${e.eventId}`;
+				e.location='Innokind Co-working Center'
+			})
+			events = list
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const selectCategory = (category: { active: boolean }) => {
+		//TODO: SOLUCIONAR CAMBIO DE ESTADO
+		category.active = !category.active
+		console.log(category)
+	};
 </script>
 
 <section>
@@ -67,7 +55,8 @@
     </h2>
     <div class="flex flex-wrap gap-4 mb-8">
 		{#each categories as category}
-			<button class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'}">
+			<button class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'}"
+			 on:click={()=>selectCategory(category)}>
 				{category.name}
 			</button>
 		{/each}
