@@ -1,20 +1,17 @@
-<script lang="ts">
-	// Props
-	let {
-		event,
-	}: {
-		event: {
-			id: number;
-			image: string;
-			description: string;
-			location: string;
-			price: number;
-			status: string;
-		};
-	} = $props();
+<script>
+	export let event
+
+	const onSelectEvent = (event) => {
+		console.log('event -> ', event)
+		//TODO VALIDAR QUE EXISTA TOKEN
+		//SI EXISTE VER DETALLES DEL EVENTO
+		//NO EXISTE ENTONCES ENVIAR A LA VISTA DE LOGIN
+	}
+
+	
 </script>
 
-<div class="bg-white overflow-hidden shadow-md border border-black">
+<div class="bg-white overflow-hidden shadow-md border border-black" on:click={()=>onSelectEvent(event)}>
 	<img src={event.image} alt={event.description} class="w-full h-48 object-cover" />
 
 	<div class="p-4">

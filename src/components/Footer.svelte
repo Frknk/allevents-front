@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	const links = [
 		{
 			name: 'POLITICAS Y PRIVACIDAD',

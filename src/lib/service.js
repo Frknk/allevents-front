@@ -8,7 +8,7 @@ const ServerConnection = (() => {
 	const events = {
 		// @ts-ignore
 		list:(params) => {
-			return axios.get(`${API.baseURL}/transaction/events`, {params})
+			return axios.get(`${API.baseURL}/transaction/public/events`, {params})
 		}
 	}
 
@@ -18,7 +18,11 @@ const ServerConnection = (() => {
 		}
 	}
 
-	return {events,category}
+	const auth = {
+
+	}
+
+	return {events,category, auth}
 })();
 
 export default ServerConnection;
