@@ -2,12 +2,19 @@
     import EventCard from "./EventCard.svelte";
 	import { onMount } from "svelte";
 	import service from '../lib/service';
+	import {User} from '../lib/UserStore';
+	import UserHelper from '../lib/checkAndLoadUserLogged';
 
 	// @ts-ignore
 	let categories=[];
 	let event={list:[], filters:{categoryId:10}};
+	let user;
+  	let authenticated=false;
+  	$: User.subscribe(value => { user = value; });
 
 	onMount(async()=>{
+		user = await UserHelper.checkAndLoadUserLogged();
+		if(user && user.token) authenticated=true;
 		await listCategories();
 		await listEvents();
 	});
@@ -46,9 +53,10 @@
 	}
 
 	// @ts-ignore
-	const selectCategory = (category) => {
+	const selectCategory = (category,index) => {
 		categories.forEach(e=>{e.active=false})
-		category.active=true;
+		categories[index].active=true;
+		categories=categories;
 		event.filters.categoryId=category.id;
 		listEvents();
 	};
@@ -60,9 +68,14 @@
         CATEGORIAS
     </h2>
     <div class="flex flex-wrap gap-4 mb-8">
-		{#each categories as category}
-			<button class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'} hover:bg-sky-700"
-			 on:click={()=>selectCategory(category)}>
+		{#each categories as category,i}
+			<button 
+				class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'} hover:bg-black hover:text-white hover:cursor-pointer"
+				class:bg-black={category.active}
+				class:text-white={category.active}
+				class:bg-white={!category.active}
+				class:text-black={!category.active}
+			 	on:click={()=>selectCategory(category,i)}>
 				{category.name}
 			</button>
 		{/each}

@@ -11,7 +11,7 @@
 	
 </script>
 
-<div class="bg-white overflow-hidden shadow-md border border-black" on:click={()=>onSelectEvent(event)}>
+<div class="bg-white overflow-hidden shadow-md border border-black hover:cursor-pointer" on:click={()=>onSelectEvent(event)}>
 	<img src={event.image} alt={event.description} class="w-full h-48 object-cover" />
 
 	<div class="p-4">
