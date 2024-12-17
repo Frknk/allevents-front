@@ -70,7 +70,7 @@
     <div class="flex flex-wrap gap-4 mb-8">
 		{#each categories as category,i}
 			<button 
-				class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'} hover:bg-black hover:text-white hover:cursor-pointer"
+				class="px-8 py-4 rounded-full border-black border text-sm font-medium {category.active ? 'bg-black text-white' : 'bg-white text-black'} hover:bg-black hover:text-"
 				class:bg-black={category.active}
 				class:text-white={category.active}
 				class:bg-white={!category.active}
@@ -82,7 +82,7 @@
 	</div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
 		{#each event.list as item}
-			<EventCard bind:event={item}/>
+			<EventCard bind:event={item} bind:user/>
 		{/each}
 	</div>
 </section>

@@ -1,5 +1,6 @@
 <script>
 	export let event
+	export let user
 
 	const onSelectEvent = (event) => {
 		console.log('event -> ', event)
