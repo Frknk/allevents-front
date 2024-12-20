@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{svelte,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "inter": ['Inter', 'sans-serif'],
+        "roboto-mono": ['Roboto Mono', 'monospace'],
+      },
+    },
   },
   plugins: [],
 }
