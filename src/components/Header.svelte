@@ -44,7 +44,7 @@
                     {item.title}
                 </a>
             {/each}
-            <a href="/sign_up" class="block px-3 py-2 text-white bg-orange-500 text-center mt-2 hover:bg-orange-600 transition-colors">REGISTRARME</a>
+            <a href="/register" class="block px-3 py-2 text-white bg-orange-500 text-center mt-2 hover:bg-orange-600 transition-colors">REGISTRARME</a>
         </div>
     </div>
     {/if}

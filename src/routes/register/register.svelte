@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SimpleFooter from "../../components/SimpleFooter.svelte";
 </script>
 
 <section class="flex flex-col font-roboto-mono">
@@ -27,3 +28,4 @@
         <button class="font-inter mt-16 px-16 py-4  rounded-xl border-black border text-sm font-medium bg-black text-white">REGISTRARME</button>
 	</form>
 </section>
+<SimpleFooter />
