@@ -25,7 +25,7 @@
 		</div>
 
         <!-- Register Button -->
-		<a href="/sign_up" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">REGISTRARME</a>
+		<a href="/register" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">REGISTRARME</a>
 
 		<!-- Mobile Menu Button -->
 		<button onclick={() => (isOpen = !isOpen)} class="md:hidden p-2 text-gray-700" aria-label="Menu">

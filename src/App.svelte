@@ -15,9 +15,7 @@
     {path: "register", component: Register},
     {path: "user", component: User}
   ]
-
-  console.log('Routes:', routes);
-
+  
   let instance = $state<Instance>();
 </script>
 
