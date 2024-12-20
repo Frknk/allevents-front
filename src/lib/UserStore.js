@@ -12,6 +12,9 @@ export const User = (function () {
     signin: (data) => {
         sessionStorage.setItem('user', JSON.stringify(data));
         set(data);
+    },
+    retrieve : () => {
+        return JSON.parse(sessionStorage.getItem('user'));
     }
   };
 })();
