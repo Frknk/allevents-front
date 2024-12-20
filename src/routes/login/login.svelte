@@ -18,6 +18,6 @@
 		<div class="mt-16">
 			<a href="/forgot_password" class="font-inter cursor-pointer hover:underline">¿HAS OLVIDADO TU CONTRASEÑA?</a>
 		</div>
-        <button class="font-inter mt-16 px-16 py-4  rounded-xl border-black border text-sm font-medium bg-black text-white">ACCEDER</button>
+        <button class="font-inter mt-16 px-16 py-4 rounded-xl border-black border text-sm font-medium bg-black text-white">ACCEDER</button>
 	</form>
 </section>

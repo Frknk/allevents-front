@@ -1,13 +1,27 @@
-<script>
+<script lang="ts">
   import Header from './components/Header.svelte';
-  import Hero from './components/Hero.svelte';
-  import Categories from './components/Categories.svelte';
   import Footer from './components/Footer.svelte';
+  import Login from './routes/login/login.svelte';
+  import { Router } from "@mateothegreat/svelte5-router";
+  import Home from './routes/home/home.svelte';
+  import type { Route } from "@mateothegreat/svelte5-router";
+  import Instance from "@mateothegreat/svelte5-router";
+  import Register from './routes/register/register.svelte';
+
+
+  const routes: Route[] = [
+    {path: "", component: Home},
+    {path: "login", component: Login},
+    {path: "register", component: Register},
+  ]
+
+  console.log('Routes:', routes);
+
+  let instance = $state<Instance>();
 </script>
 
 <Header />
 <main class="max-w-5xl mx-auto px-6">
-  <Hero />
-  <Categories />
+  <Router bind:instance {routes} />
   <Footer/>
 </main>

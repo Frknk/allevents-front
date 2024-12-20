@@ -6,6 +6,8 @@
 	let fullName: string = $state("JULIO DERI");
 	let email: string = $state("EXAMPLE@GMAIL");
 	let password: string = $state("123ABC");
+	
+
 </script>
 
 <section class="flex min-h-screen bg-gray-50">

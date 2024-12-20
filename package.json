@@ -17,6 +17,7 @@
     "vite": "^6.0.1"
   },
   "dependencies": {
+    "@mateothegreat/svelte5-router": "^0.1.35",
     "axios": "^1.7.9"
   }
 }
