@@ -1,5 +1,10 @@
 <script lang="ts">
 	import { Settings, Calendar, CreditCard, LogOut } from "lucide-svelte";
+	import {User} from '../lib/UserStore';
+
+	// User
+	let user;
+	$effect(User.subscribe(value => { user = value; }));
 
 	// Props
 	let { fullName }: { fullName: string } = $props();
@@ -12,7 +17,16 @@
 		{ label: "FACTURACIÓN", icon: CreditCard, href: "#" },
 	];
 
-
+	// Function to handle logout
+	function handleLogout() {
+		// Add your logout logic here
+		try {
+			User.signout();
+			window.location.href = "/login";
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
 </script>
 
@@ -35,7 +49,7 @@
 		</ul>
 	</nav>
     <hr class="border-0 border-t border-black mb-4" />
-	<button class="flex items-center p-3 text-black hover:bg-black/5  mt-auto justify-between rounded-full">
+	<button class="flex items-center p-3 text-black hover:bg-black/5  mt-auto justify-between rounded-full" onclick={handleLogout}>
 		CERRAR SESIÓN
         <LogOut class="w-5 h-5 mr-3" />
 	</button>
