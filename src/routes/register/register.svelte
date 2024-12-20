@@ -74,6 +74,9 @@
 		</div>
         <button type="submit" class="font-inter mt-16 px-16 py-4  rounded-xl border-black border text-sm font-medium bg-black text-white">REGISTRARME</button>
 	</form>
+	<div class="mt-16">
+		<a href="/login" class="font-inter cursor-pointer hover:underline">¿YA ESTAS REGISTRADO	?</a>
+	  </div>
 </section>
 <SimpleFooter />
 
