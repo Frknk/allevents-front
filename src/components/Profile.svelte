@@ -21,7 +21,7 @@
 </script>
 
 <div class="max-w-2xl">
-	<h1 class="text-3xl font-bold mb-8">PERFIL</h1>
+	<h1 class="text-4xl font-bold mb-8 font-roboto-mono">PERFIL</h1>
 
 	<form onsubmit={handleSubmit} class="space-y-6">
         <hr class="mb-2 w-full border-0 border-t border-black" />

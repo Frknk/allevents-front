@@ -14,6 +14,7 @@
 
 	onMount(async()=>{
 		user = await UserHelper.checkAndLoadUserLogged();
+		console.log(user)
 		if(user && user.token) authenticated=true;
 		await listCategories();
 		await listEvents();

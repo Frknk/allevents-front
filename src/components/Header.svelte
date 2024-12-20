@@ -1,5 +1,9 @@
 <script lang="ts">
     import Logo from "./Logo.svelte";
+    import {User} from "../lib/UserStore";
+    import UserHelper from "../lib/checkAndLoadUserLogged";
+    import { onMount } from "svelte";
+
     let navItems: { title: string; href: string }[] = $state([
 		{ title: "EVENTOS", href: "#eventos" },
 		{ title: "PROYECTOS", href: "#proyectos" },
@@ -7,7 +11,16 @@
 		{ title: "BLOG", href: "#blog" },
 	]);
 
+    // @ts-ignore
     let isOpen: boolean = $state(false)
+    let user
+    let authenticated= $state(false);
+    $effect(User.subscribe(value => { user = value; }));
+
+    onMount(async () => {
+        user = await UserHelper.checkAndLoadUserLogged();
+        if(user && user.token) authenticated = true;
+    });
 
 </script>
 
@@ -24,8 +37,12 @@
 			{/each}
 		</div>
 
-        <!-- Register Button -->
-		<a href="/register" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">REGISTRARME</a>
+        <!-- Register/User Button -->
+		{#if authenticated}
+			<a href="/user" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">USUARIO</a>
+		{:else}
+			<a href="/register" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">REGISTRARME</a>
+		{/if}
 
 		<!-- Mobile Menu Button -->
 		<button onclick={() => (isOpen = !isOpen)} class="md:hidden p-2 text-gray-700" aria-label="Menu">
@@ -44,7 +61,11 @@
                     {item.title}
                 </a>
             {/each}
-            <a href="/register" class="block px-3 py-2 text-white bg-orange-500 text-center mt-2 hover:bg-orange-600 transition-colors">REGISTRARME</a>
+            {#if authenticated}
+				<a href="/user" class="block px-3 py-2 text-white bg-orange-500 text-center mt-2 hover:bg-orange-600 transition-colors">USUARIO</a>
+			{:else}
+				<a href="/register" class="block px-3 py-2 text-white bg-orange-500 text-center mt-2 hover:bg-orange-600 transition-colors">REGISTRARME</a>
+			{/if}
         </div>
     </div>
     {/if}
