@@ -1,21 +1,39 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { Settings, Calendar, CreditCard, LogOut } from "lucide-svelte";
 	import {User} from '../lib/UserStore';
 
 	// User
 	let user;
+	let currentPath = '';
+
+    onMount(() => {
+        currentPath = window.location.pathname;
+		console.log(currentPath);
+    });
 	$effect(User.subscribe(value => { user = value; }));
 
 	// Props
 	let { fullName }: { fullName: string } = $props();
 
 	// Navigation items
-	const navItems = [
-		{ label: "EVENTOS", icon: Calendar, href: "#" },
-		{ label: "PERFIL", icon: Settings, href: "#", active: true },
-		{ label: "AJUSTES", icon: Settings, href: "/settings" },
-		{ label: "FACTURACIÓN", icon: CreditCard, href: "#" },
+	const navItems: { label: string; icon: typeof Calendar; href: string; active?: boolean }[] = [
+		{ label: "EVENTOS", icon: Calendar, href: "/user/events" },
+		{ label: "PERFIL", icon: Settings, href: "/user/profile" },
+		{ label: "AJUSTES", icon: Settings, href: "/user//settings" },
+		{ label: "FACTURACIÓN", icon: CreditCard, href: "/user/payments" },
 	];
+
+	// Function to set the active item
+	function setActiveItem(href) {
+		navItems.forEach(item => {
+			item.active = item.href === href;
+			console.log(item.active);
+		});
+	}
+
+	// Call setActiveItem with the current path
+	setActiveItem(window.location.pathname);
 
 	// Function to handle logout
 	function handleLogout() {
