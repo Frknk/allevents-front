@@ -31,6 +31,17 @@ const ServerConnection = (() => {
 		}
 	}
 
+	const updateUser = (id, userData) => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.put(`${API.authURL}/user/${id}`, userData, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+			}
+		});
+	}
+
 	const login = (data) => {
 		return axios.post(`${API.authURL}/auth/login`, data)
 		/*data format 
@@ -48,17 +59,17 @@ const ServerConnection = (() => {
 		/*data format 
 		
 		{
-  		"firstName": "Frank",
-  		"lastName": "Rivera",
-  		"identityNumber": "77433136",
-  		"email": "frank1@email.com",
-  		"password": "frank123",
-  		"repassword": "frank123"
+			"firstName": "Frank",
+			"lastName": "Rivera",
+			"identityNumber": "77433136",
+			"email": "frank1@email.com",
+			"password": "frank123",
+			"repassword": "frank123"
 	}
 		*/
 	}
 
-	return { events, category, login, register }
+	return { events, category, login, register, updateUser }
 })();
 
 export default ServerConnection;
