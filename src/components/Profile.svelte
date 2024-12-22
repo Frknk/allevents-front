@@ -1,5 +1,6 @@
 <script lang="ts">
 	import service from "../lib/service";
+	import {User} from "../lib/UserStore";
 	
 	let firstName = "";
 	let lastName = "";
@@ -11,6 +12,8 @@
 	let errorMessage = "";
 	let successMessage = "";
 
+	const user = User.retrieve();
+ 
 	const updateProfile = async () => {
 		const userData = { firstName, lastName, identityNumber, email, password, phone, address };
 		try {
@@ -46,22 +49,22 @@
 		<hr class="mb-2 w-full border-0 border-t border-black" />
 		<div class=" flex flex-row space-x-12 py-2">
 			<label for="first-name" class="w-52">NOMBRE: </label>
-			<input id="first-name" class="text-2xl" placeholder="JULIO" bind:value={firstName} />
+			<input id="first-name" class="text-2xl" placeholder={user.firstname} bind:value={firstName} />
 		</div>
 		<hr class="mb-2 w-full border-0 border-t border-black" />
 		<div class=" flex flex-row space-x-12 py-2">
 			<label for="last-name" class="w-52">APELLIDO: </label>
-			<input id="last-name" class="text-2xl" placeholder="DERI" bind:value={lastName} />
+			<input id="last-name" class="text-2xl" placeholder={user.lastname} bind:value={lastName} />
 		</div>
 		<hr class="mb-2 w-full border-0 border-t border-black" />
 		<div class=" flex flex-row space-x-12 py-2">
 			<label for="identity-number" class="w-52">IDENTIFICACIÓN: </label>
-			<input id="identity-number" class="text-2xl" placeholder="77433136" bind:value={identityNumber} />
+			<input id="identity-number" class="text-2xl" placeholder={user.identitynumber} bind:value={identityNumber} />
 		</div>
 		<hr class="mb-2 w-full border-0 border-t border-black" />
 		<div class=" flex flex-row space-x-12 py-2">
 			<label for="email" class="w-52">EMAIL: </label>
-			<input id="email" class="text-2xl" placeholder="EXAMPLE@EMAIL" bind:value={email} />
+			<input id="email" class="text-2xl" placeholder={user.email} bind:value={email} />
 		</div>
 		<hr class="mb-2 w-full border-0 border-t border-black" />
 		<div class=" flex flex-row space-x-12 py-2">
