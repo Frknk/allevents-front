@@ -5,10 +5,10 @@
     import { onMount } from "svelte";
 
     let navItems: { title: string; href: string }[] = $state([
-		{ title: "EVENTOS", href: "#eventos" },
-		{ title: "PROYECTOS", href: "#proyectos" },
-		{ title: "PROPIETARIO DEL EVENTO", href: "#propietario" },
-		{ title: "BLOG", href: "#blog" },
+		{ title: "EVENTOS", href: "/#eventos" },
+		{ title: "PROYECTOS", href: "/#proyectos" },
+		{ title: "PROPIETARIO DEL EVENTO", href: "/#propietario" },
+		{ title: "BLOG", href: "/#blog" },
 	]);
 
     // @ts-ignore
@@ -39,7 +39,7 @@
 
         <!-- Register/User Button -->
 		{#if authenticated}
-			<a href="/user" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">USUARIO</a>
+			<a href="/user/profile" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">USUARIO</a>
 		{:else}
 			<a href="/register" class="hidden md:block bg-orange-500 text-white px-6 py-2 font-medium hover:bg-orange-600 transition-colors">REGISTRARME</a>
 		{/if}
