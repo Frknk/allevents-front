@@ -7,13 +7,14 @@
   import Instance from "@mateothegreat/svelte5-router";
   import Register from './routes/register/register.svelte';
   import User from './routes/user/user.svelte';
-
+  import EventDetails from './components/EventDetails.svelte';
 
   const routes: Route[] = [
     {path: "", component: Home},
     {path: "login", component: Login},
     {path: "register", component: Register},
-    {path: "user", component: User}
+    {path: "user", component: User},
+    {path: "events", component: EventDetails}
   ]
   
   let instance = $state<Instance>();

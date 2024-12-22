@@ -62,7 +62,7 @@
 	};
 </script>
 
-<section>
+<section id="eventos">
     <div class="hidden absolute -z-10 inset-0 bg-[#FFF152]"></div>
     <h2 class=" text-4xl font-roboto-mono mb-8">
         CATEGORIAS
@@ -86,7 +86,10 @@
 	<!-- Events -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16">
 		{#each event.list as item}
+		<a href="/events/{item.eventId}" class="hover:shadow-lg">
 			<EventCard bind:event={item} bind:user/>
+		</a>
 		{/each}
+
 	</div>
 </section>
