@@ -4,8 +4,8 @@ import { data } from 'autoprefixer';
 
 const API = {}
 API.baseURL = 'http://localhost:8080/api'
-API.authURL = 'http://allevents-api-users-liw9tx-484dfb-4-246-226-22.traefik.me/api'
-API.eventsURL = 'http://allevents-api-events-qgtx1u-fcb737-4-246-226-22.traefik.me/api'
+API.authURL = 'http://allevents-api-users-rrrlhz-182cd0-149-56-46-214.traefik.me/api'
+API.eventsURL = 'http://allevents-api-users-eyu8wy-f59b9e-149-56-46-214.traefik.me/api'
 
 let user;
 let headers;
@@ -29,6 +29,17 @@ const ServerConnection = (() => {
 		list: () => {
 			return axios.get(`${API.eventsURL}/transaction/public/categories`)
 		}
+	}
+
+	const getEvent = (id) => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.get(`${API.eventsURL}/transaction/events/${id}`, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+			}
+		});
 	}
 
 	const updateUser = (id, userData) => {
@@ -69,7 +80,7 @@ const ServerConnection = (() => {
 		*/
 	}
 
-	return { events, category, login, register, updateUser }
+	return { events, category, login, register, updateUser, getEvent }
 })();
 
 export default ServerConnection;

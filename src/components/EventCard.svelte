@@ -2,6 +2,8 @@
 	export let event
 	export let user
 
+	console.log(event)
+
 	const onSelectEvent = (event) => {
 		console.log('event -> ', event)
 		//TODO VALIDAR QUE EXISTA TOKEN
@@ -12,12 +14,12 @@
 	
 </script>
 
-<div class="bg-white overflow-hidden shadow-md border border-black hover:cursor-pointer" on:click={()=>onSelectEvent(event)}>
-	<img src={event.image} alt={event.description} class="w-full h-48 object-cover" />
+<div class="bg-white overflow-hidden shadow-md border border-black hover:cursor-pointer" >
+	<img src={event.image} alt={event.name} class="w-full h-48 object-cover" />
 
 	<div class="p-4">
 		<p class="text-sm text-gray-600 mb-2">{event.location}</p>
-		<h3 class="font-medium text-lg mb-4">{event.description}</h3>
+		<h3 class="font-medium text-lg mb-4">{event.eventName}</h3>
 
 		<div class="flex justify-between items-center">
 			<div class="flex items-center gap-2">

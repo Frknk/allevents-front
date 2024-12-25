@@ -10,11 +10,12 @@
   import EventDetails from './components/EventDetails.svelte';
 
   const routes: Route[] = [
-    {path: "", component: Home},
     {path: "login", component: Login},
     {path: "register", component: Register},
     {path: "user", component: User},
-    {path: "events", component: EventDetails}
+    {path: "events", component: EventDetails},
+    {path: "", component: Home},
+
   ]
   
   let instance = $state<Instance>();
