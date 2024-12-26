@@ -44,7 +44,7 @@ const ServerConnection = (() => {
 
 	const getEvent = (id) => {
 		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
-		return axios.get(`${API.eventsURL}/transaction/events/${id}`, {
+		return axios.get(`${API.eventsURL}/transaction/public/events/${id}`, {
 			headers: {
 				'Authorization': `Bearer ${token}`,
 				'Content-Type': 'application/json',

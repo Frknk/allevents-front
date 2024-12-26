@@ -60,7 +60,6 @@
                 {response?.comment2}
             </p>
         </div>
-        <p>{JSON.stringify(response, null, 2)}</p>
     </div>
     <Footer />
 </section>

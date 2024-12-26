@@ -45,8 +45,9 @@
     <form on:submit|preventDefault={handleSubmit} class="space-y-4">
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Name</label>
+            <label for="name" class="w-52">NOMBRE</label>
             <input 
+                id="name"
                 type="text" 
                 bind:value={formData.name}
                 required
@@ -55,8 +56,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Description</label>
+            <label for="description" class="w-52">DESCRIPCION</label>
             <textarea 
+                id="description"
                 bind:value={formData.description}
                 required
                 class="text-2xl mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -64,8 +66,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Event Date</label>
+            <label for="eventDate" class="w-52">FECHA EVENTO</label>
             <input 
+                id="eventDate"
                 type="datetime-local" 
                 bind:value={formData.eventDate}
                 required
@@ -74,8 +77,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Price</label>
+            <label for="price" class="w-52">PRECIO</label>
             <input 
+                id="price"
                 type="number" 
                 bind:value={formData.price}
                 required
@@ -84,8 +88,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Category</label>
+            <label for="category" class="w-52">CATEGORIA</label>
             <select 
+                id="category"
                 bind:value={formData.category}
                 required
                 class="text-2xl mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -98,8 +103,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Location ID</label>
+            <label for="locationId" class="w-52">ID LOCACION</label>
             <input 
+                id="locationId"
                 type="number" 
                 bind:value={formData.locationId}
                 required
@@ -108,7 +114,7 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Comment</label>
+            <label for="comment" class="w-52">COMENTARIO</label>
             <input 
                 type="text" 
                 bind:value={formData.comment}
@@ -117,8 +123,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">Comment 2</label>
+            <label for="comment2" class="w-52">COMENTARIO 2</label>
             <input 
+                id="comment2"
                 type="text" 
                 bind:value={formData.comment2}
                 class="text-2xl mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -126,8 +133,9 @@
         </div>
         <hr class="mb-2 w-full border-0 border-t border-black" />
         <div class="flex flex-row space-x-12 py-2">
-            <label class="w-52">State</label>
+            <label for="state" class="w-52">ESTADO</label>
             <input 
+                id="state"
                 type="number" 
                 bind:value={formData.state}
                 required
@@ -139,7 +147,7 @@
             type="submit"
             class="font-inter mt-8 px-16 py-4 rounded-xl border-black border text-sm font-medium bg-black text-white"
         >
-            Create Event
+            CREAR EVENTO
         </button>
     </form>
 </div>
