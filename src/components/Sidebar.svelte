@@ -14,7 +14,7 @@
 	$effect(User.subscribe(value => { user = value; }));
 
 	// Props
-	let { fullName }: { fullName: string } = $props();
+	let { fullName, roleName }: { fullName: string, roleName: string } = $props();
 
 	// Navigation items
 	const navItems: { label: string; icon: typeof Calendar; href: string; active?: boolean }[] = [
@@ -51,6 +51,7 @@
 <aside class="w-64 bg-[#E9DEC9] p-6 flex flex-col h-screen border border-black">
 	<div class="mb-8">
 		<h2 class="text-lg font-bold">{fullName}</h2>
+		<p>{roleName}</p>
 	</div>
 
 	<nav class="flex-1">

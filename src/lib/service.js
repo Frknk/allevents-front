@@ -31,6 +31,17 @@ const ServerConnection = (() => {
 		}
 	}
 
+	const createEvent = (data) => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.post(`${API.eventsURL}/transaction/events`, data, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+			}
+		});
+	}
+
 	const getEvent = (id) => {
 		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
 		return axios.get(`${API.eventsURL}/transaction/events/${id}`, {
@@ -80,7 +91,7 @@ const ServerConnection = (() => {
 		*/
 	}
 
-	return { events, category, login, register, updateUser, getEvent }
+	return { events, category, login, register, updateUser, getEvent, createEvent }
 })();
 
 export default ServerConnection;
