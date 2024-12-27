@@ -29,11 +29,15 @@
 </script>
 
 <div class="max-w-2xl">
+    <h1 class="text-4xl mb-2 font-bold font-roboto-mono">EVENTOS</h1>
     {#if user.roleId === 2}
-        <h1 class="text-4xl mb-2 font-bold font-roboto-mono">EVENTOS</h1>
-        <EventCreate />
+    <a 
+    href="/user/eventcreate" 
+    class="inline-block px-6 py-2 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors mb-8"
+>
+    Crear Evento
+</a>
     {/if}
-    {#if user.roleId !== 2}
         <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16"
         >
@@ -43,5 +47,4 @@
                 </a>
             {/each}
         </div>
-    {/if}
 </div>

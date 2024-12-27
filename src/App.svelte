@@ -8,12 +8,14 @@
   import Register from './routes/register/register.svelte';
   import User from './routes/user/user.svelte';
   import EventDetails from './components/EventDetails.svelte';
+  import CheckoutEvent from './components/CheckoutEvent.svelte';
 
   const routes: Route[] = [
     {path: "login", component: Login},
     {path: "register", component: Register},
     {path: "user", component: User},
     {path: "events", component: EventDetails},
+    {path: "checkout", component: CheckoutEvent},
     {path: "", component: Home},
 
   ]

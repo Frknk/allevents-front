@@ -6,6 +6,7 @@ const API = {}
 API.baseURL = 'http://localhost:8080/api'
 API.authURL = 'http://allevents-api-users-rrrlhz-182cd0-149-56-46-214.traefik.me/api'
 API.eventsURL = 'http://allevents-api-users-eyu8wy-f59b9e-149-56-46-214.traefik.me/api'
+API.paysURL = 'http://localhost:8084/api'
 
 let user;
 let headers;
@@ -91,7 +92,61 @@ const ServerConnection = (() => {
 		*/
 	}
 
-	return { events, category, login, register, updateUser, getEvent, createEvent }
+	const getBanks = () => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.get(`${API.paysURL}/settings/banks`, {
+			headers:
+			{
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+	}})
+	}
+
+	const getPaymodes = () => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.get(`${API.paysURL}/settings/paymodes`, {
+			headers:
+			{
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+	}})
+	}
+
+	const returnTickets = (price) => {
+		const tickets = {
+			"general" : price,
+			"vip" : price * 0.15,
+			"platino" : price * 0.3,
+			"golden": price * 0.5
+		}
+		return tickets;
+	}
+
+	const editEvent = (id, data) => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.put(`${API.eventsURL}/transaction/events/${id}`, data, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+			}
+		});
+	}
+
+	const deleteEvent = (id) => {
+		const token = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).token : null;
+		return axios.delete(`${API.eventsURL}/transaction/events/${id}`, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json',
+				'accept': '*/*'
+			}
+		});
+	}
+
+	return { events, category, login, register, updateUser, getEvent, createEvent, getBanks, returnTickets, deleteEvent, editEvent }
 })();
 
 export default ServerConnection;

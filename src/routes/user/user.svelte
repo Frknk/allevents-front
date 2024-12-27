@@ -5,6 +5,8 @@
 	import EventsAdmin from "../../components/EventsAdmin.svelte";
 	import { onMount } from "svelte";
 	import { User } from "../../lib/UserStore";
+	import EventCreate from "../../components/EventCreate.svelte";
+	import EventEdit from "../../components/EventEdit.svelte";
 
 	import { route, Router, type Route } from "@mateothegreat/svelte5-router";
 
@@ -26,6 +28,14 @@
 		{
 			path: "events",
 			component: EventsAdmin,
+		},
+		{
+			path: "eventcreate",
+			component: EventCreate,
+		},
+		{
+			path: "eventedit",
+			component: EventEdit,
 		},
 		{
 			path: "",
@@ -50,13 +60,6 @@
 {#snippet snippet()}
 	<div class="flex flex-col gap-3 bg-green-400 p-4">
 		I'm a snippet!<br />
-		Click on a link above to see the params..
-	</div>
-{/snippet}
-
-{#snippet test()}
-	<div class="flex flex-col gap-3 bg-green-400 p-4">
-		I'm a test!<br />
 		Click on a link above to see the params..
 	</div>
 {/snippet}
