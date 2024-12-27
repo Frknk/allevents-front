@@ -117,9 +117,9 @@ const ServerConnection = (() => {
 	const returnTickets = (price) => {
 		const tickets = {
 			"general" : price,
-			"vip" : price * 0.15,
-			"platino" : price * 0.3,
-			"golden": price * 0.5
+			"vip" : price * 1.2,
+			"platino" : price * 1.4,
+			"golden": price * 1.6
 		}
 		return tickets;
 	}
@@ -146,7 +146,7 @@ const ServerConnection = (() => {
 		});
 	}
 
-	return { events, category, login, register, updateUser, getEvent, createEvent, getBanks, returnTickets, deleteEvent, editEvent }
+	return { events, category, login, register, updateUser, getEvent, createEvent, getBanks, returnTickets, deleteEvent, editEvent, getPaymodes }
 })();
 
 export default ServerConnection;

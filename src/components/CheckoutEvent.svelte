@@ -11,9 +11,21 @@
     let quantity = 1;
     let loading = false;
     let paymentMethod = 'card';
+    let paymentMethods = [];
+    let banks = [];
+    let tickets = {};
+    let selectedTicketType = 'general';
+    let successMessage = '';
+
+    const ticketTypes = [
+        { value: 'general', label: 'General' },
+        { value: 'vip', label: 'VIP' },
+        { value: 'platino', label: 'Platino' },
+        { value: 'golden', label: 'Golden' }
+    ];
 
     $: User.subscribe(value => { user = value; });
-    $: totalPrice = response?.price * quantity || 0;
+    $: totalPrice = tickets[selectedTicketType] * quantity || 0;
 
     onMount(async () => {
         id = window.location.pathname.split("/").pop();
@@ -22,10 +34,32 @@
         if (!response) {
             window.location.href = "/";
         }
+
+        tickets = service.returnTickets(response.price);
+
+        try {
+            const paymodesResponse = await service.getPaymodes();
+            paymentMethods = paymodesResponse.data.list;
+            console.log('Payment methods:', paymentMethods); // Add this to see exact names
+            
+            // Fetch banks initially
+            await fetchBanks();
+        } catch (error) {
+            console.error("Error fetching payment methods:", error);
+        }
     });
 
-    function handlePriceClick() {
-        showModal = true;
+    $: if (paymentMethod === 'TRANSFERENCIA' || paymentMethod === 'transferencia') {
+        fetchBanks();
+    }
+
+    async function fetchBanks() {
+        try {
+            const banksResponse = await service.getBanks();
+            banks = banksResponse.data.list;
+        } catch (error) {
+            console.error("Error fetching banks:", error);
+        }
     }
 
     function closeModal() {
@@ -49,9 +83,10 @@
         
         loading = true;
         try {
-            // Add your purchase API call here
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-            window.location.href = `/success/${id}`;
+            await new Promise(resolve => setTimeout(resolve, 1000)); 
+            //window.location.href = `/success/${id}`;
+            successMessage = '¡Compra exitosa!';
+
         } catch (error) {
             console.error('Purchase failed:', error);
         } finally {
@@ -72,14 +107,34 @@
                     alt="Event"
                     class="w-full h-48 object-cover rounded-lg mb-4"
                 />
-                <h2 class="text-xl font-semibold mb-2">{response?.description}</h2>
+                <h2 class="text-xl font-semibold mb-2">{response?.name}</h2>
                 <p class="text-gray-600 mb-2">{new Date(response?.createAt).toLocaleDateString()}</p>
+                <p class="mb-4">{response?.description}</p>
+                {#if successMessage}
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                        <strong class="font-bold">¡Éxito!</strong>
+                        <span class="block sm:inline">{successMessage}</span>
+                    </div>
+                {/if}
             </div>
 
             <!-- Checkout Form -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-4">Orden</h3>
                 
+                <!-- Ticket Type Selector -->
+                <div class="mb-6">
+                    <label class="font-medium block mb-2">Tipo de Entrada:</label>
+                    <select 
+                        class="w-full border rounded px-3 py-2"
+                        bind:value={selectedTicketType}
+                    >
+                        {#each ticketTypes as type}
+                            <option value={type.value}>{type.label} - ${tickets[type.value]}</option>
+                        {/each}
+                    </select>
+                </div>
+
                 <!-- Quantity Selector -->
                 <div class="flex items-center gap-4 mb-6">
                     <label class="font-medium">Cantidad:</label>
@@ -100,22 +155,33 @@
                 <div class="mb-6">
                     <label class="font-medium block mb-2">Método de pago:</label>
                     <div class="space-y-2">
-                        <label class="flex items-center gap-2">
-                            <input type="radio" bind:group={paymentMethod} value="card">
-                            <span>Tarjeta de crédito/débito</span>
-                        </label>
-                        <label class="flex items-center gap-2">
-                            <input type="radio" bind:group={paymentMethod} value="transfer">
-                            <span>Transferencia bancaria</span>
-                        </label>
+                        {#each paymentMethods as method}
+                            <label class="flex items-center gap-2">
+                                <input type="radio" bind:group={paymentMethod} value={method.name.toLowerCase()}>
+                                <span>{method.name}</span>
+                            </label>
+                        {/each}
                     </div>
                 </div>
+
+                <!-- Bank Selector (if Transferencia) -->
+                {#if paymentMethod.toUpperCase() === 'TRANSFERENCIA'}
+                    <div class="mb-6">
+                        <label class="font-medium block mb-2">Selecciona tu banco:</label>
+                        <select class="w-full border rounded px-3 py-2">
+                            <option value="">Selecciona un banco</option>
+                            {#each banks as bank}
+                                <option value={bank.code}>{bank.name}</option>
+                            {/each}
+                        </select>
+                    </div>
+                {/if}
 
                 <!-- Price Summary -->
                 <div class="border-t pt-4 mb-6">
                     <div class="flex justify-between mb-2">
-                        <span>Precio por ticket:</span>
-                        <span>${response?.price}</span>
+                        <span>Precio por ticket ({ticketTypes.find(t => t.value === selectedTicketType).label}):</span>
+                        <span>${tickets[selectedTicketType]}</span>
                     </div>
                     <div class="flex justify-between mb-2">
                         <span>Cantidad:</span>

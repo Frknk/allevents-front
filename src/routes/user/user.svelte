@@ -7,6 +7,7 @@
 	import { User } from "../../lib/UserStore";
 	import EventCreate from "../../components/EventCreate.svelte";
 	import EventEdit from "../../components/EventEdit.svelte";
+	import ShowPayments from "../../components/ShowPayments.svelte";
 
 	import { route, Router, type Route } from "@mateothegreat/svelte5-router";
 
@@ -24,6 +25,10 @@
 				email,
 				password,
 			},
+		},
+		{
+			path: "payments",
+			component: ShowPayments,
 		},
 		{
 			path: "events",

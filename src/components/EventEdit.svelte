@@ -103,6 +103,7 @@
             <input 
                 id="price"
                 type="number" 
+                min="1"
                 bind:value={formData.price}
                 placeholder="Enter event price"
                 required
